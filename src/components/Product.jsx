@@ -20,7 +20,7 @@ class Product extends Component {
               </button>
               <button
                 onClick={() => this.props.onDecrement(this.props.product)}
-                className="btn btn-secondary fw-bold m-"
+                className={this.getDisabledClasses()}
               >
                 -
               </button>
@@ -35,6 +35,11 @@ class Product extends Component {
         </div>
       </div>
     );
+  }
+  getDisabledClasses() {
+    let classes = "btn btn-secondary m-2 ";
+    classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";
+    return classes;
   }
 }
 
