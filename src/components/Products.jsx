@@ -10,18 +10,20 @@ class Products extends Component {
     this.setState({ products });
   };
 
-  // handelIncrement = (product) => {
-  //   const products = [...this.state.products];
-  //   product = { ...product };
-  //   product.quantity++;
-  //   this.setState({ products });
-  // };
-
   handelIncrement = (product) => {
     const products = [...this.state.products];
     const index = products.indexOf(product);
     products[index] = { ...product };
     products[index].quantity++;
+    this.setState({ products });
+  };
+
+  handelDecrement = (product) => {
+    if (product.quantity === 0) return;
+    const products = [...this.state.products];
+    const index = products.indexOf(product);
+    products[index] = { ...product };
+    products[index].quantity--;
     this.setState({ products });
   };
 
@@ -34,6 +36,7 @@ class Products extends Component {
             product={product}
             onDelete={this.handleDelete}
             onIncrement={this.handelIncrement}
+            onDecrement={this.handelDecrement}
           />
         ))}
       </div>
