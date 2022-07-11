@@ -7,7 +7,7 @@ class Product extends Component {
         <div className="container">
           <div className="row">
             <div className="col-1">
-              <button className="btn btn-primary badge fw-bold m-2">
+              <button className={this.getBadgeClasses()}>
                 {this.props.product.quantity}
               </button>
             </div>
@@ -39,6 +39,12 @@ class Product extends Component {
   getDisabledClasses() {
     let classes = "btn btn-secondary m-2 ";
     classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";
+    return classes;
+  }
+
+  getBadgeClasses() {
+    let classes = "m-2 badge fw-bold btn btn-";
+    classes += this.props.product.quantity === 0 ? "warning" : "primary";
     return classes;
   }
 }
