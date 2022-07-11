@@ -10,22 +10,32 @@ class Products extends Component {
     this.setState({ products });
   };
 
+  // handelIncrement = (product) => {
+  //   const products = [...this.state.products];
+  //   product = { ...product };
+  //   product.quantity++;
+  //   this.setState({ products });
+  // };
+
+  handelIncrement = (product) => {
+    const products = [...this.state.products];
+    const index = products.indexOf(product);
+    products[index] = { ...product };
+    products[index].quantity++;
+    this.setState({ products });
+  };
+
   render() {
     return (
       <div>
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              {this.state.products.map((product) => (
-                <Product
-                  key={this.state.products.id}
-                  product={product}
-                  onDelete={this.handleDelete}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        {this.state.products.map((product) => (
+          <Product
+            key={product.id}
+            product={product}
+            onDelete={this.handleDelete}
+            onIncrement={this.handelIncrement}
+          />
+        ))}
       </div>
     );
   }
