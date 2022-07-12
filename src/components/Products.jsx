@@ -35,14 +35,61 @@ class Products extends Component {
     this.setState({ products });
   };
 
+  //HEJ ALADIN! Vilken metod för handleDeleteAll är en bättre lösning enligt dig, lösning 1 elle 2? Detta om vi utgår från att jag hade gjort uppgiften precis enligt instruktionerna utan att lägga till de extra metoderna som handleAddAll o.s.v
+
+  //LÖSNING 1
+  // handleDeleteAll = () => {
+  //   const products = [];
+  //   this.setState({ products });
+  // };
+
+  //LÖSNING 2
+  handleDeleteAll = () => {
+    let products = this.state.products.map((product) => ({
+      ...product,
+    }));
+    products.length = 0;
+    this.setState({ products });
+  };
+
+  //-------------------------------------------------------------------------------------------------------
+  handleAddAll = () => {
+    const products = getProduct();
+    this.setState({ products });
+  };
+
+  handleDeleteOrAdd = () => {
+    return this.state.products.length === 0
+      ? this.handleAddAll()
+      : this.handleDeleteAll();
+  };
+
+  getDeleteorAddButtonClasses() {
+    let classes = "fw-bold m-2 btn btn-";
+    classes += this.state.products.length === 0 ? "success" : "danger";
+    return classes;
+  }
+
+  formatButtonText() {
+    return this.state.products.length === 0 ? "Add all" : "Delete all";
+  }
+
   render() {
+    if (this.state.products.length === 0) return;
+
     return (
       <div>
         <button
           onClick={() => this.handleReset()}
-          className="btn btn-primary m-3"
+          className="fw-bold  btn btn-primary m-3"
         >
           Reset
+        </button>
+        <button
+          onClick={() => this.handleDeleteOrAdd()}
+          className={this.getDeleteorAddButtonClasses()}
+        >
+          {this.formatButtonText()}
         </button>
         {this.state.products.map((product) => (
           <Product
