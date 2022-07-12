@@ -6,9 +6,9 @@ class Product extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-1">
+            <div className="col-2">
               <button className={this.getBadgeClasses()}>
-                {this.props.product.quantity}
+                {this.formatQuantity()}
               </button>
             </div>
             <div className="col">
@@ -41,11 +41,17 @@ class Product extends Component {
     classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";
     return classes;
   }
-
   getBadgeClasses() {
     let classes = "m-2 badge fw-bold btn btn-";
-    classes += this.props.product.quantity === 0 ? "warning" : "primary";
+    classes +=
+      this.props.product.quantity === 0 ? "warning text-dark" : "primary";
     return classes;
+  }
+
+  formatQuantity() {
+    return this.props.product.quantity === 0
+      ? "Zero"
+      : this.props.product.quantity;
   }
 }
 

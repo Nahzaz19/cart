@@ -27,9 +27,23 @@ class Products extends Component {
     this.setState({ products });
   };
 
+  handleReset = () => {
+    const products = this.state.products.map((product) => ({
+      ...product,
+      quantity: 0,
+    }));
+    this.setState({ products });
+  };
+
   render() {
     return (
       <div>
+        <button
+          onClick={() => this.handleReset()}
+          className="btn btn-primary m-3"
+        >
+          Reset
+        </button>
         {this.state.products.map((product) => (
           <Product
             key={product.id}
