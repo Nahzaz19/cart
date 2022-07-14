@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 
 class App extends Component {
   state = { products: getProduct() };
+
   handleDelete = (id) => {
     const products = this.state.products.filter((product) => product.id !== id);
     this.setState({ products });
@@ -64,32 +65,42 @@ class App extends Component {
       : this.handleDeleteAll();
   };
 
-  getDeleteorAddButtonClasses() {
+  getDeleteorAddButtonClasses = () => {
     let classes = "fw-bold m-2 btn btn-";
     classes += this.state.products.length === 0 ? "success" : "danger";
     return classes;
-  }
+  };
 
-  formatButtonText() {
+  formatButtonText = () => {
     return this.state.products.length === 0 ? "Add all" : "Delete all";
-  }
+  };
 
-  ResetButton() {
+  resetButton = () => {
     if (this.state.products.length === 0) return;
     return (
       <button
         onClick={() => this.handleReset()}
-        className="fw-bold  btn btn-primary m-3"
+        className="fw-bold btn btn-primary m-3"
       >
         Reset
       </button>
     );
-  }
+  };
   render() {
     return (
       <>
         <Navbar productCount={this.state.products.length} />
-        <Products />;
+        <Products
+          products={this.state.products}
+          onDelete={this.handleDelete}
+          onDeleteOrAdd={this.handleDeleteOrAdd}
+          getClasses={this.getDeleteorAddButtonClasses}
+          resetButton={this.resetButton}
+          onIncrement={this.handelIncrement}
+          onDecrement={this.handelDecrement}
+          formatButtonText={this.formatButtonText}
+        />
+        ;
       </>
     );
   }
