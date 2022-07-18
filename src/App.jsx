@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({ products });
   };
 
-  //HEJ ALADIN! Vilken metod för handleDeleteAll är en bättre lösning enligt dig, lösning 1 (som är kommenterad) elle lösning 2?
+  //HEJ ALADIN! Vilken metod för handleDeleteAll är en bättre lösning enligt dig, lösning 1 (som är bortkommenterad) elle lösning 2?
 
   //LÖSNING 1
   // handleDeleteAll = () => {
@@ -66,7 +66,7 @@ class App extends Component {
   };
 
   getDeleteorAddButtonClasses = () => {
-    let classes = "fw-bold m-2 btn btn-";
+    let classes = "fw-bold ms-3  btn btn-";
     classes += this.state.products.length === 0 ? "success" : "danger";
     return classes;
   };
@@ -100,7 +100,6 @@ class App extends Component {
           onDecrement={this.handelDecrement}
           formatButtonText={this.formatButtonText}
         />
-        ;
       </>
     );
   }

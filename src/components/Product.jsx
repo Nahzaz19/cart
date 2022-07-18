@@ -4,17 +4,17 @@ class Product extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="ms-2">
           <div className="row">
-            <div className="col-2">
-              <button className={this.getBadgeClasses()}>
+            <div className="col-1">
+              <span className={this.getBadgeClasses()}>
                 {this.formatQuantity()}
-              </button>
+              </span>
             </div>
-            <div className="col">
+            <div className="col-2 ps-3">
               <button
                 onClick={() => this.props.onIncrement(this.props.product)}
-                className="btn btn-secondary fw-bold m-2"
+                className="btn btn-secondary fw-bold me-2"
               >
                 +
               </button>
@@ -41,6 +41,7 @@ class Product extends Component {
     classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";
     return classes;
   }
+
   getBadgeClasses() {
     let classes = "m-2 badge fw-bold btn btn-";
     classes +=
