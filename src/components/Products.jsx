@@ -3,28 +3,35 @@ import Product from "./Product";
 
 class Products extends Component {
   render() {
+    const {
+      getClasses,
+      onDelete,
+      onIncrement,
+      onDecrement,
+      formatButtonText,
+      onDeleteOrAdd,
+      resetButton,
+      products,
+    } = this.props;
+
     return (
       <div className="ms-5">
-        {this.props.resetButton()}
+        {resetButton()}
 
-        <button
-          onClick={() => this.props.onDeleteOrAdd()}
-          className={this.props.getClasses()}
-        >
-          {this.props.formatButtonText()}
+        <button onClick={() => onDeleteOrAdd()} className={getClasses()}>
+          {formatButtonText()}
         </button>
 
-        {this.props.products.map((product) => (
+        {products.map((product) => (
           <Product
             key={product.id}
             product={product}
-            onDelete={this.props.onDelete}
-            onIncrement={this.props.onIncrement}
-            onDecrement={this.props.onDecrement}
-            formatButtonText={this.props.formatButtonText}
-            onDeleteOrAdd={this.props.onDeleteOrAdd}
-            getClasses={this.props.onDeleteOrAdd}
-            resetButton={this.props.resetButton}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+            formatButtonText={formatButtonText}
+            onDeleteOrAdd={onDeleteOrAdd}
+            resetButton={resetButton}
           />
         ))}
       </div>

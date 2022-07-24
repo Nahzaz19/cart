@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 class Product extends Component {
   render() {
+    const { onIncrement, product, onDecrement, onDelete } = this.props;
+
     return (
       <div>
         <div className="ms-2">
@@ -13,19 +15,19 @@ class Product extends Component {
             </div>
             <div className="col-2 ps-3">
               <button
-                onClick={() => this.props.onIncrement(this.props.product)}
+                onClick={() => onIncrement(product)}
                 className="btn btn-secondary fw-bold me-2"
               >
                 +
               </button>
               <button
-                onClick={() => this.props.onDecrement(this.props.product)}
+                onClick={() => onDecrement(product)}
                 className={this.getDisabledClasses()}
               >
                 -
               </button>
               <button
-                onClick={() => this.props.onDelete(this.props.product.id)}
+                onClick={() => onDelete(product.id)}
                 className="btn btn-danger fw-bold m-2"
               >
                 X
@@ -36,6 +38,7 @@ class Product extends Component {
       </div>
     );
   }
+
   getDisabledClasses() {
     let classes = "btn btn-secondary m-2 ";
     classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";

@@ -6,6 +6,40 @@ import Navbar from "./components/Navbar";
 class App extends Component {
   state = { products: getProduct() };
 
+  render() {
+    const {
+      handelDecrement,
+      handelIncrement,
+      handleDelete,
+      handleDeleteOrAdd,
+      formatButtonText,
+      resetButton,
+      getDeleteorAddButtonClasses,
+    } = this;
+
+    const { products } = this.state;
+
+    return (
+      <>
+        <Navbar
+          productCount={
+            products.filter((product) => product.quantity > 0).length
+          }
+        />
+        <Products
+          products={products}
+          onDelete={handleDelete}
+          onDeleteOrAdd={handleDeleteOrAdd}
+          getClasses={getDeleteorAddButtonClasses}
+          resetButton={resetButton}
+          onIncrement={handelIncrement}
+          onDecrement={handelDecrement}
+          formatButtonText={formatButtonText}
+        />
+      </>
+    );
+  }
+
   handleDelete = (id) => {
     const products = this.state.products.filter((product) => product.id !== id);
     this.setState({ products });
@@ -36,24 +70,11 @@ class App extends Component {
     this.setState({ products });
   };
 
-  //HEJ ALADIN! Vilken metod för handleDeleteAll är en bättre lösning enligt dig, lösning 1 (som är bortkommenterad) elle lösning 2?
-
-  //LÖSNING 1
-  // handleDeleteAll = () => {
-  //   const products = [];
-  //   this.setState({ products });
-  // };
-
-  //LÖSNING 2
   handleDeleteAll = () => {
-    let products = this.state.products.map((product) => ({
-      ...product,
-    }));
-    products.length = 0;
+    const products = [];
     this.setState({ products });
   };
 
-  //-------------------------------------------------------------------------------------------------------
   handleAddAll = () => {
     const products = getProduct();
     this.setState({ products });
@@ -86,23 +107,6 @@ class App extends Component {
       </button>
     );
   };
-  render() {
-    return (
-      <>
-        <Navbar productCount={this.state.products.length} />
-        <Products
-          products={this.state.products}
-          onDelete={this.handleDelete}
-          onDeleteOrAdd={this.handleDeleteOrAdd}
-          getClasses={this.getDeleteorAddButtonClasses}
-          resetButton={this.resetButton}
-          onIncrement={this.handelIncrement}
-          onDecrement={this.handelDecrement}
-          formatButtonText={this.formatButtonText}
-        />
-      </>
-    );
-  }
 }
 
 export default App;
