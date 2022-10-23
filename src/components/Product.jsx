@@ -22,7 +22,8 @@ class Product extends Component {
               </button>
               <button
                 onClick={() => onDecrement(product)}
-                className={this.getDisabledClasses()}
+                className="btn btn-secondary fw-bold m-2"
+                disabled={product.quantity === 0}
               >
                 -
               </button>
@@ -37,12 +38,6 @@ class Product extends Component {
         </div>
       </div>
     );
-  }
-
-  getDisabledClasses() {
-    let classes = "btn btn-secondary m-2 ";
-    classes += this.props.product.quantity === 0 ? "disabled" : "fw-bold";
-    return classes;
   }
 
   getBadgeClasses() {

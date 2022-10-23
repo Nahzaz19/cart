@@ -21,11 +21,7 @@ class App extends Component {
 
     return (
       <>
-        <Navbar
-          productCount={
-            products.filter((product) => product.quantity > 0).length
-          }
-        />
+        <Navbar productCount={products.filter((p) => p.quantity > 0).length} />
         <Products
           products={products}
           onDelete={handleDelete}
